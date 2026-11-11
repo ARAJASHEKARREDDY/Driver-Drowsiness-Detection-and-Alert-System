@@ -1,207 +1,112 @@
-# 🚗 DriverSafe — Driver Drowsiness Detection & Audio Alert System
+# 🚗 Driver Drowsiness Detection and Alert System
 
-<p align="center">
-  <img src="assets/project-showcase.png" alt="DriverSafe project showcase" width="100%">
-</p>
+### Real-Time Driver Monitoring Using Computer Vision and Deep Learning-Based Facial Landmark Detection
 
-<p align="center">
-  <b>Stay Alert. Drive Safe.</b><br>
-  A Python computer-vision project that monitors eye closure through a webcam and plays an audible warning when a configurable drowsiness threshold is reached.
-</p>
+## 📌 Project Overview
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10%2B-blue" alt="Python">
-  <img src="https://img.shields.io/badge/OpenCV-Computer%20Vision-green" alt="OpenCV">
-  <img src="https://img.shields.io/badge/MediaPipe-Face%20Mesh-orange" alt="MediaPipe">
-  <img src="https://img.shields.io/badge/Status-Educational%20Prototype-yellow" alt="Prototype">
-  <img src="https://img.shields.io/badge/License-MIT-lightgrey" alt="MIT License">
-</p>
+The **Driver Drowsiness Detection and Alert System** is a real-time computer vision application developed using Python to identify signs of driver fatigue and drowsiness through webcam monitoring.
 
-## Overview
+Driver fatigue is one of the major contributing factors to road accidents. This project aims to improve road safety by continuously monitoring the driver's eye movements and detecting prolonged eye closure.
 
-DriverSafe is an educational, webcam-based prototype for demonstrating a computer-vision approach to driver drowsiness monitoring. It uses **OpenCV** to capture webcam frames, **MediaPipe Face Mesh** to locate facial landmarks, and the **Eye Aspect Ratio (EAR)** to estimate whether the eyes remain closed across a configurable number of consecutive frames. When the threshold is crossed, the application displays a warning and attempts to play an alert sound.
+The system uses **OpenCV** for real-time video frame processing and **MediaPipe Face Mesh** to identify facial landmarks around the eyes. By calculating the **Eye Aspect Ratio (EAR)**, the application determines whether the driver's eyes are open or closed. If the eye closure condition persists beyond a predefined number of consecutive frames, the system identifies potential drowsiness and triggers an audio alert to warn the driver.
 
-> **Important provenance note:** This repository contains a newly created reference implementation prepared for GitHub. It is not a recovered copy of any previously built, submitted, or deployed project. Replace or extend it with your original implementation if you have one.
+The application provides continuous monitoring with visual status indicators and sound-based warnings.
 
-> **Safety notice:** This is a learning/demo prototype, not a certified driver-monitoring or vehicle-safety system. It can miss drowsiness or trigger false alarms due to lighting, camera position, glasses, occlusion, face orientation, and individual differences. Never rely on it while driving or use it as a substitute for rest, safe driving practices, or certified safety equipment. Test only in a stationary, controlled environment.
+## 🎯 Project Objectives
 
-## ✨ Features
+- Detect driver drowsiness in real time using webcam input.
+- Identify facial landmarks and monitor eye movements.
+- Calculate the Eye Aspect Ratio (EAR) to determine eye closure.
+- Detect prolonged eye closure using a predefined threshold.
+- Generate an audio alert when drowsiness is detected.
+- Improve driver awareness and contribute to road safety.
 
-- Live webcam frame capture using OpenCV.
-- Face and eye landmark detection using MediaPipe Face Mesh.
-- Eye Aspect Ratio (EAR) calculation for both eyes.
-- Configurable EAR threshold and consecutive-frame trigger.
-- On-screen EAR value and status indicator.
-- Best-effort audio warning with a cooldown to reduce repeated beeps.
-- Command-line options for camera index and sensitivity tuning.
-- Modular code with a small unit-test suite.
+## ✨ Key Features
 
-## 🧰 Technology Stack
+- **Real-Time Webcam Monitoring:** Captures and processes live video frames.
+- **Facial Landmark Detection:** Uses MediaPipe Face Mesh to identify facial and eye landmarks.
+- **Eye Aspect Ratio Calculation:** Measures eye openness using facial landmark coordinates.
+- **Drowsiness Detection:** Identifies prolonged eye closure using EAR and frame-count thresholds.
+- **Audio Alert System:** Plays an audible warning when drowsiness is detected.
+- **Visual Status Monitoring:** Displays normal and drowsiness warning indicators.
+- **Continuous Detection:** Repeatedly monitors the driver's eye movements during application execution.
 
-| Technology | Role |
+## ⚙️ Technologies Used
+
+| Technology | Purpose |
 |---|---|
-| Python | Main programming language |
-| OpenCV | Webcam access, frame processing, and display |
-| MediaPipe Face Mesh | Facial landmark detection |
-| NumPy | Dependency used by the computer-vision stack |
-| `winsound` / terminal bell | Best-effort alert sound, depending on operating system |
-| Git & GitHub | Version control and project hosting |
+| Python | Core programming language |
+| OpenCV | Webcam access and image processing |
+| MediaPipe | Facial landmark and eye detection |
+| NumPy | Numerical and coordinate calculations |
+| Pygame / Audio Library | Sound alert generation |
 
-## 🧠 How It Works
+## 🔄 System Workflow
 
-1. **Capture:** OpenCV reads frames from the selected webcam.
-2. **Landmark detection:** MediaPipe Face Mesh identifies facial landmarks.
-3. **Eye measurement:** The application calculates the Eye Aspect Ratio (EAR) for the left and right eyes.
-4. **Temporal check:** EAR below the configured threshold increments a consecutive-frame counter; an open-eye reading resets it.
-5. **Warning:** When the counter reaches the configured limit, the interface displays a drowsiness warning and triggers an audio alert.
+1. **Start Application:** Initialize the drowsiness detection system.
+2. **Capture Webcam Frames:** Access the webcam and capture live video.
+3. **Detect Face and Eye Landmarks:** Identify facial landmarks using MediaPipe Face Mesh.
+4. **Calculate EAR:** Calculate the Eye Aspect Ratio from the detected eye coordinates.
+5. **Evaluate Threshold:** Compare the EAR value against a predefined threshold for consecutive frames.
+6. **Determine Driver Status:**
+   - Normal: Eyes remain sufficiently open.
+   - Drowsy: Eye closure persists beyond the configured frame threshold.
+7. **Trigger Alert:** Display a warning and play an audio alert when drowsiness is detected.
 
-<p align="center">
-  <img src="assets/system-architecture.png" alt="DriverSafe system architecture" width="100%">
-</p>
+## 🏗️ System Architecture
 
-<p align="center">
-  <img src="assets/detection-workflow.png" alt="DriverSafe detection workflow" width="100%">
-</p>
+The application follows a modular computer vision pipeline:
 
-### Eye Aspect Ratio
+**Webcam Input → OpenCV Frame Processing → MediaPipe Face Mesh → Eye Aspect Ratio Calculation → Threshold Evaluation → Visual Warning & Audio Alert**
 
-EAR compares vertical eye opening with horizontal eye width. A lower value can indicate a closed or nearly closed eye. This prototype uses a simple threshold and consecutive-frame rule; it is not a medical measurement or a validated fatigue classifier.
+## 📐 Eye Aspect Ratio (EAR)
 
-## 📦 Project Structure
+The Eye Aspect Ratio is a mathematical measure used to estimate whether the eyes are open or closed.
 
-```text
-Driver-Drowsiness-Detection/
-├── assets/
-│   ├── project-showcase.png
-│   ├── system-architecture.png
-│   └── detection-workflow.png
-├── docs/
-│   ├── PROJECT_OVERVIEW.md
-│   ├── USER_BENEFITS.md
-│   └── FUTURE_ENHANCEMENTS.md
-├── src/
-│   ├── __init__.py
-│   ├── alerts.py
-│   ├── app.py
-│   └── detector.py
-├── tests/
-│   └── test_detector.py
-├── .env.example
-├── .gitignore
-├── requirements.txt
-├── CONTRIBUTING.md
-├── LICENSE
-└── README.md
-```
+It is calculated using the vertical and horizontal distances between specific eye landmarks.
 
-## ⚙️ Installation & Setup
+EAR is calculated as:
 
-### Prerequisites
+EAR = (||P2-P6|| + ||P3-P5||) / (2 × ||P1-P4||)
 
-- Python 3.10 or 3.11 recommended.
-- A working webcam.
-- Webcam permission enabled for your terminal or IDE.
-- Windows, macOS, or Linux (MediaPipe wheel availability can vary by platform and Python version).
+Where:
+- P1 and P4 represent horizontal eye landmarks.
+- P2, P3, P5, and P6 represent vertical eye landmarks.
 
-### 1. Clone the repository
+A lower EAR value generally indicates that the eyes are closing. When the EAR remains below the configured threshold for a predefined number of consecutive frames, the system triggers a drowsiness warning.
 
-```bash
-git clone https://github.com/YOUR-USERNAME/Driver-Drowsiness-Detection.git
-cd Driver-Drowsiness-Detection
-```
+## 🌍 Real-World Applications
 
-### 2. Create and activate a virtual environment
+- Driver fatigue monitoring systems.
+- Road safety and accident prevention solutions.
+- Intelligent transportation systems.
+- Automotive driver assistance applications.
+- Computer vision-based human monitoring systems.
 
-**Windows**
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-```
+## 🚀 Expected Outcome
 
-**macOS / Linux**
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
+The system continuously monitors the driver's eyes through a webcam, identifies prolonged eye closure, and generates an audio warning to alert the driver.
 
-### 3. Install dependencies
+It demonstrates how computer vision and facial landmark detection can be applied to develop practical driver safety solutions.
 
-```bash
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-```
+## 🔮 Future Enhancements
 
-### 4. Run the application
+- Integrate yawning detection.
+- Implement head-pose estimation.
+- Add advanced machine learning-based fatigue classification.
+- Develop a mobile application for driver monitoring.
+- Integrate GPS-based emergency notification.
+- Extend compatibility with embedded systems such as Raspberry Pi.
 
-```bash
-python src/app.py
-```
+## ⚠️ Disclaimer
 
-Press **Q** while the video window is focused to exit.
+This project is developed for educational and demonstration purposes. It is a prototype and should not be considered a replacement for certified automotive safety systems or responsible driving practices.
 
-## 🎛️ Configuration
+## 👨‍💻 Project Category
 
-Tune the threshold and consecutive-frame count for your environment:
+**Domain:** Artificial Intelligence / Computer Vision  
+**Project Type:** Real-Time Detection System  
+**Input:** Live Webcam  
+**Output:** Visual Warning and Audio Alert  
+**Programming Language:** Python
 
-```bash
-python src/app.py --threshold 0.21 --frames 18
-```
-
-Use another camera device:
-
-```bash
-python src/app.py --camera 1
-```
-
-Disable the mirrored preview:
-
-```bash
-python src/app.py --no-mirror
-```
-
-The default values are starting points only. Camera resolution, lighting, face position, and hardware can affect the observed EAR. There is no universal threshold that works reliably for every person and camera.
-
-## 🧪 Run Tests
-
-From the repository root:
-
-```bash
-python -m unittest discover -s tests -v
-```
-
-The tests cover the EAR helper's basic input behavior; they do not validate real-world drowsiness detection accuracy.
-
-## 🌍 Potential Applications
-
-- Computer-vision learning and demonstration.
-- Academic mini-projects and final-year project exploration.
-- Prototyping driver-monitoring concepts in a controlled lab.
-- Demonstrating real-time video processing and alert workflows.
-
-## 🔐 Privacy
-
-This reference implementation processes webcam frames locally and does not intentionally upload or store video frames. Camera access begins when the application is run. Users should review the code and their operating system's camera permissions before use.
-
-## 🗺️ Future Enhancements
-
-See [`docs/FUTURE_ENHANCEMENTS.md`](docs/FUTURE_ENHANCEMENTS.md) for a detailed roadmap. Potential additions include yawn detection, head-pose estimation, calibration, event logging, configurable alert patterns, and a more robust validation process.
-
-## 🤝 Contributing
-
-Issues, bug reports, and pull requests are welcome. Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) before contributing.
-
-## 👤 Author & Project Attribution
-
-Add your name, portfolio, and contact links here before publishing:
-
-- **Author:** YOUR NAME
-- **GitHub:** https://github.com/YOUR-USERNAME
-- **Portfolio / LinkedIn:** YOUR PROFILE URL
-
-## 📄 License
-
-Distributed under the MIT License. See [`LICENSE`](LICENSE).
-
----
-
-<p align="center"><b>DriverSafe — A learning project exploring computer vision for safer journeys.</b></p>
