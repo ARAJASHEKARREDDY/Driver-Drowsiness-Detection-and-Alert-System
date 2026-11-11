@@ -110,3 +110,9 @@ This project is developed for educational and demonstration purposes. It is a pr
 **Output:** Visual Warning and Audio Alert  
 **Programming Language:** Python
 
+<img width="1710" height="867" alt="system-architecture" src="https://github.com/user-attachments/assets/95e0da01-8dd7-4f5f-961f-a361bfc20e56" />
+<img width="1726" height="867" alt="detection-workflow" src="https://github.com/user-attachments/assets/741cfbeb-53b7-41d0-9938-f071fe0d06f8" />
+<img width="2299" height="1299" alt="LhyeGtoGBuRSVpq3cPiLzZkGevosFkpHy2kbhSk0bzU6zXq9RlmPpoLhqQ9Rke9TKfJK4NCybUYTrVSUfBTHfh_c7iBVQZ6tYRKItU_iEoSpXPrgvaodAiZCI68gq8cS8A0LBDteiQ9m2vDbImFJhP5_921kCo3isqCz_38tcGtUwbRS50FFtmsc04PLKQD_" src="https://github.com/user-attachments/assets/b0f99201-7b42-49c0-80d4-a1f1bd6855e2" />
+
+
+
