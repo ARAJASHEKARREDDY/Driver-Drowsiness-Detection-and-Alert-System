@@ -1,9 +1,3 @@
-
-Ammakolla Rajashekar
-Attachments
-1:38 PM (14 minutes ago)
-to me, Prem
-
 # 🚗 Driver Drowsiness Detection and Alert System
 
 ### Real-Time Driver Monitoring Using Computer Vision and Deep Learning-Based Facial Landmark Detection
